@@ -6,13 +6,13 @@ import { UserExistsException } from '../exeptions/user-exists-exceptions';
 import { CreateUser } from '../interfaces/users.interface';
 import { UserDoesNotExistException } from '../exeptions/user-does-not-exist-exceptions';
 
-const users: User[] = [
+let users: User[] = [
   {
     email: 'darian7cc@gmail.com',
     fullName: 'Yojan',
     password: '12345',
     phone: '+573143927175',
-    roles: [UserRoleEnum.ADMIN],
+    roles: [UserRoleEnum.ADMIN, UserRoleEnum.CLIENT],
   },
 ];
 
@@ -35,6 +35,10 @@ export class UsersService {
     return user;
   }
 
+  getUsers() {
+    return users;
+  }
+
   findUserManyByRole(role: UserRoleEnum) {
     return users.filter((user) => user.roles.includes(role));
   }
@@ -47,5 +51,10 @@ export class UsersService {
     }
 
     return userExists;
+  }
+
+  deleteUser(email) {
+    users = users.filter((user) => user.email !== email);
+    return { email };
   }
 }

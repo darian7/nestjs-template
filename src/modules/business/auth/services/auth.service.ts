@@ -6,7 +6,7 @@ import {
   RequestUserEmailPasswordAuthGuard,
 } from '../interfaces/auth.interface';
 import { UsersService } from '../../users/services/users.service';
-import { IncorrectPasswordException } from '../exeptions/incorrect password-exceptions';
+import { IncorrectPasswordException } from '../exeptions/incorrect-password-exceptions';
 import { UserRoleEnum } from '../../users/enums/user-role.enum';
 
 @Injectable()

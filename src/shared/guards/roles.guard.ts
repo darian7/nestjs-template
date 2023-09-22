@@ -4,6 +4,7 @@ import { Reflector } from '@nestjs/core';
 import { ROLES_KEY } from '../decorators/roles.decorator';
 import { RequestUserJwtAuthGuard } from '../../modules/business/auth/interfaces/auth.interface';
 import { UserRoleEnum } from '../../modules/business/users/enums/user-role.enum';
+import { UnauthorizedRoleException } from '../exeptions/unauthorized-role.exceptions';
 
 @Injectable()
 export class RolesGuard implements CanActivate {
@@ -22,6 +23,12 @@ export class RolesGuard implements CanActivate {
       .switchToHttp()
       .getRequest() as RequestUserJwtAuthGuard;
 
-    return requiredRoles.some((role) => user.roles?.includes(role));
+    const acces = requiredRoles.some((role) => user.roles?.includes(role));
+
+    if (!acces) {
+      throw new UnauthorizedRoleException(requiredRoles);
+    }
+
+    return true;
   }
 }
