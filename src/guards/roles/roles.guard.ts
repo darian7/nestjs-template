@@ -1,10 +1,10 @@
 import { Injectable, CanActivate, ExecutionContext } from '@nestjs/common';
 import { Reflector } from '@nestjs/core';
 
-import { ROLES_KEY } from '../decorators/roles.decorator';
+import { ROLES_KEY } from '../../decorators/roles/roles.decorator';
 import { RequestUserJwtAuthGuard } from '../../modules/business/auth/interfaces/auth.interface';
 import { UserRoleEnum } from '../../modules/business/users/enums/user-role.enum';
-import { UnauthorizedRoleException } from '../exeptions/unauthorized-role.exceptions';
+import { UnauthorizedRoleException } from '../../decorators/roles/exeptions/unauthorized-role.exceptions';
 
 @Injectable()
 export class RolesGuard implements CanActivate {

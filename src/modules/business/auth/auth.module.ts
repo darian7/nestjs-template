@@ -2,7 +2,7 @@ import { Module, forwardRef } from '@nestjs/common';
 import { JwtModule } from '@nestjs/jwt';
 import { ConfigService } from '@nestjs/config';
 
-import { AppConfig } from '../../../@common/interfaces/app.config.interfaces';
+import { AppConfig } from '../../../config/app-config/interfaces/app.config.interfaces';
 import { EmailPasswordStrategy } from './strategys/email-password.strategy';
 import { JwtStrategy } from './strategys/jwt.strategy';
 import { AuthController } from './controllers/auth.controller';
