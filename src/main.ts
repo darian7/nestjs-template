@@ -3,7 +3,7 @@ import { AppModule } from './modules/app/app.module';
 import { ValidationPipe } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { AppConfig } from './config/app-config/interfaces/app.config.interfaces';
-import { GlobalExceptionFilter } from './filters/global-exception.filter';
+import { GlobalExceptionFilter } from './common/filters/global-exception/global-exception.filter';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -11,7 +11,7 @@ async function bootstrap() {
   app.useGlobalFilters(new GlobalExceptionFilter());
 
   const configService = app.get(ConfigService);
-  const configApp = configService.get<AppConfig>('config');
+  const configApp = configService.get<AppConfig>('app');
   await app.listen(configApp?.server.port, () => {
     console.log('port listen:', configApp?.server.port);
   });

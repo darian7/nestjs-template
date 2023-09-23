@@ -1,5 +1,5 @@
 import { HttpException, HttpStatus } from '@nestjs/common';
-import { UserRoleEnum } from 'src/modules/business/users/enums/user-role.enum';
+import { UserRoleEnum } from '../../../../modules/business/users/enums/user-role.enum';
 
 export class UnauthorizedRoleException extends HttpException {
   constructor(private roles: UserRoleEnum[]) {
