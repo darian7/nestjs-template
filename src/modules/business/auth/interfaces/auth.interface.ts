@@ -1,26 +1,29 @@
 import { UserRoleEnum } from '../../users/enums/user-role.enum';
 
+/* JWT */
 export interface JwtPayload {
   sub: string;
-  id: string;
   email: string;
-  roles: [UserRoleEnum];
+  roles: UserRoleEnum[];
+}
+
+export interface RequestUserJwt {
+  email: string;
+  roles: UserRoleEnum[];
 }
 
 export interface RequestUserJwtAuthGuard {
-  user: {
-    id: string;
-    email: string;
-    roles: [UserRoleEnum];
-  };
+  user: RequestUserJwt;
+}
+
+/* email-password authGuard */
+export interface RequestUserEmailPassword {
+  email: string;
+  roles: UserRoleEnum[];
 }
 
 export interface RequestUserEmailPasswordAuthGuard {
-  user: {
-    id: string;
-    email: string;
-    roles: [UserRoleEnum];
-  };
+  user: RequestUserEmailPassword;
 }
 
 export interface Signup {

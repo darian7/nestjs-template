@@ -4,6 +4,7 @@ import { JwtService } from '@nestjs/jwt';
 import {
   Signup,
   RequestUserEmailPasswordAuthGuard,
+  JwtPayload,
 } from '../interfaces/auth.interface';
 import { UsersService } from '../../users/services/users.service';
 import { IncorrectPasswordException } from '../exeptions/incorrect-password-exceptions';
@@ -28,7 +29,6 @@ export class AuthService {
   }
 
   async signupUser(user: Signup) {
-    await this.usersService.checkEmailAvailability(user?.email);
     return await this.usersService.createUser({
       ...user,
       roles: [UserRoleEnum.CLIENT],
@@ -36,8 +36,8 @@ export class AuthService {
   }
 
   async signIn({ user }: RequestUserEmailPasswordAuthGuard) {
-    const payload = {
-      sub: user.id,
+    const payload: JwtPayload = {
+      sub: user.email,
       email: user.email,
       roles: user.roles,
     };
