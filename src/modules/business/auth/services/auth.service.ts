@@ -18,8 +18,8 @@ export class AuthService {
     private jwtService: JwtService,
   ) {}
 
-  async validateUser(email: string, password: string) {
-    const user = await this.usersService.getUserByEmail(email);
+  validateUser(email: string, password: string) {
+    const user = this.usersService.getUserByEmail(email);
 
     if (user.password !== password) {
       throw new IncorrectPasswordException();
@@ -28,8 +28,8 @@ export class AuthService {
     return user;
   }
 
-  async signupUser(user: Signup) {
-    return await this.usersService.createUser({
+  signupUser(user: Signup) {
+    return this.usersService.createUser({
       ...user,
       roles: [UserRoleEnum.CLIENT],
     });

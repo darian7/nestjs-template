@@ -19,7 +19,7 @@ export class AuthController {
   @Post('signup')
   @HttpCode(200)
   async signup(@Body() input: SignupUserDto) {
-    return await this.authService.signupUser(input);
+    return this.authService.signupUser(input);
   }
 
   @UseGuards(EmailPasswordAuthGuard)

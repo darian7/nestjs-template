@@ -8,7 +8,7 @@ import { UserDoesNotExistException } from '../exeptions/user-does-not-exist-exce
 
 let users: User[] = [
   {
-    email: 'darian7cc@gmail.com',
+    email: 'darian@gmail.com',
     fullName: 'Yojan',
     password: '12345',
     phone: '+573143927175',
@@ -21,6 +21,7 @@ export class UsersService {
   constructor() {}
 
   createUser(user: CreateUser) {
+    this.checkEmailAvailability(user.email);
     users.push(user);
     return user;
   }
@@ -43,18 +44,24 @@ export class UsersService {
     return users.filter((user) => user.roles.includes(role));
   }
 
-  checkEmailAvailability(email) {
+  checkEmailAvailability(email: string) {
     const userExists = users.some((user) => user.email == email);
 
     if (userExists) {
       throw new UserExistsException();
     }
 
-    return userExists;
+    return !userExists;
   }
 
-  deleteUser(email) {
-    users = users.filter((user) => user.email !== email);
+  deleteUser(email: string) {
+    const user = users.find((user) => user.email === email);
+
+    if (!user) {
+      throw new UserDoesNotExistException();
+    }
+
+    users = users.filter((item) => item.email !== email);
     return { email };
   }
 }

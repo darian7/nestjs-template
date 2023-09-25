@@ -21,14 +21,14 @@ export class UsersController {
   @Roles(UserRoleEnum.CLIENT)
   @UseGuards(JwtAuthGuard, RolesGuard)
   @Get('find-one')
-  getProfile(@Request() req: RequestUserJwtAuthGuard) {
+  getUser(@Request() req: RequestUserJwtAuthGuard) {
     return this.usersService.getUserByEmail(req.user.email);
   }
 
   @Roles(UserRoleEnum.ADMIN)
   @UseGuards(JwtAuthGuard, RolesGuard)
   @Get('find-many')
-  getProfiles() {
+  getUsers() {
     return this.usersService.getUsers();
   }
 
@@ -36,7 +36,7 @@ export class UsersController {
   @UseGuards(JwtAuthGuard, RolesGuard)
   @UseGuards(JwtAuthGuard)
   @Delete(':email')
-  deleteByUserId(@Param('email') email: string) {
+  deleteByUserEmail(@Param('email') email: string) {
     return this.usersService.deleteUser(email);
   }
 }
