@@ -1,0 +1,17 @@
+version: "3.8"
+
+services:
+  nestjs-template:
+    build: .
+    env_file:
+      - .env
+    ports:
+      - "4000:3000"
+    volumes:
+      - ./src:/usr/docker/src
+    networks:
+      - nestJs-template-network
+
+networks:
+  nestJs-template-network:
+    driver: bridge

@@ -14,6 +14,7 @@ export class GlobalExceptionFilter implements ExceptionFilter {
     const status = exception?.getStatus?.() ?? HttpStatus.INTERNAL_SERVER_ERROR;
     const request = httpHost.getRequest();
     const response = httpHost.getResponse();
+    const method = httpHost.getRequest()?.method;
 
     const errorResponse = {
       statusCode: status,
@@ -23,6 +24,7 @@ export class GlobalExceptionFilter implements ExceptionFilter {
         exception,
       timestamp: new Date().toISOString(),
       path: request.url,
+      method,
     };
 
     Logger.error(
